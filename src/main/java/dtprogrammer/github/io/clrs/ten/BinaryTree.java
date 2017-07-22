@@ -40,9 +40,15 @@ class BinaryTree<E> {
         final E data;
         TreeNode left;
         TreeNode right;
+        TreeNode parent;
 
         TreeNode(E data) {
+            this(data, null);
+        }
+
+        TreeNode(E data, TreeNode parent) {
             this.data = data;
+            this.parent = parent;
         }
     }
 
@@ -52,25 +58,25 @@ class BinaryTree<E> {
      * @param data the element to be inserted
      */
     void insert(E data) {
-        root = insert(root, data);
+        root = insertWithParent(root, data, null);
     }
 
-    private TreeNode insert(TreeNode node, E data) {
+    private TreeNode insertWithParent(TreeNode node, E data, TreeNode parent) {
         if (node == null) {
-            node = new TreeNode(data);
+            node = new TreeNode(data, parent);
         } else {
             if (node.left == null) {
-                node.left = insert(node.left, data);
+                node.left = insertWithParent(node.left, data, node);
             } else if (node.right == null) {
-                node.right = insert(node.right, data);
+                node.right = insertWithParent(node.right, data, node);
             } else {
                 // neither left or right child is null so randomly select one to traverse down
                 // this is very naive random
                 double random = Math.random();
                 if (random < 0.5) {
-                    node.left = insert(node.left, data);
+                    node.left = insertWithParent(node.left, data, node);
                 } else {
-                    node.right = insert(node.right, data);
+                    node.right = insertWithParent(node.right, data, node);
                 }
             }
         }
