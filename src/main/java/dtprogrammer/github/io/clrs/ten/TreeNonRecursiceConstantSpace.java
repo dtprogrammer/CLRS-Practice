@@ -33,7 +33,7 @@ package dtprogrammer.github.io.clrs.ten;
  * A non recursive constant space traversal is only possible if we the nodes have pointer to its parent which can be
  * used during traversal.
  */
-public class TreeNonRecursiceConstantSpace {
+class TreeNonRecursiceConstantSpace {
 
     static void print(BinaryTree.TreeNode node) {
         // the parent to root node is null

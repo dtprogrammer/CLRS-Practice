@@ -35,19 +35,20 @@ import java.io.PrintStream;
  */
 public class ConsoleTestBase {
 
-  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-  @Before
-  public void setUpStreams() {
-    System.setOut(new PrintStream(outContent));
-  }
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
 
-  @After
-  public void cleanUpStreams() {
-    System.setOut(null);
-  }
+    @After
+    public void cleanUpStreams() {
+        outContent.reset();
+        System.setOut(null);
+    }
 
-  protected ByteArrayOutputStream getOutContent() {
-    return outContent;
-  }
+    protected ByteArrayOutputStream getOutContent() {
+        return outContent;
+    }
 }
